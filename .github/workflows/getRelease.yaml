@@ -1,19 +1,22 @@
+name: Daily Formula Update
 
-name: update release version
-
-on: 
-  #schedule:
-  #- cron: '30 0 * * *'
+on:
+  schedule:
+    - cron: '30 0 * * *'
   workflow_dispatch:
 
 jobs:
-  build: 
+  update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v2
-      - name: Run Shell
-        run: |
-          bash getRelease.sh
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: actions/checkout@v6
+
+      - name: Check and update formulas
+        run: bash getRelease.sh
+
+      - uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: update release version
+          commit_message: "chore: update formula to latest release"
+          file_pattern: "Formula/*.rb"
