@@ -23,19 +23,19 @@ update_rdap(){
     echo -e "${YELLOW}→ Updating rdap from v${current_version} to v${last_version}${NC}"
 
     # Update version in the formula
-    sed -i "s/version \".*\"/version \"${last_version}\"/" Formula/rdap.rb
+    sed -i '' "s/version \".*\"/version \"${last_version}\"/" Formula/rdap.rb
 
     # Download the new binaries
     wget -q -O rdap_macos_aarch64 https://github.com/xtomcom/rdap/releases/download/v${last_version}/rdap-${last_version}-macos-aarch64
     wget -q -O rdap_macos_x86_64 https://github.com/xtomcom/rdap/releases/download/v${last_version}/rdap-${last_version}-macos-x86_64
 
     # Calculate the SHA256 hash for the new binaries
-    aarch64_sha256=$(sha256sum rdap_macos_aarch64 | cut -d ' ' -f 1)
-    x86_64_sha256=$(sha256sum rdap_macos_x86_64 | cut -d ' ' -f 1)
+    aarch64_sha256=$(shasum -a 256 rdap_macos_aarch64 | cut -d ' ' -f 1)
+    x86_64_sha256=$(shasum -a 256 rdap_macos_x86_64 | cut -d ' ' -f 1)
 
     # Update the SHA256 hashes in the formula
-    sed -i "8s/.*/    sha256 \"${aarch64_sha256}\"/" Formula/rdap.rb
-    sed -i "11s/.*/    sha256 \"${x86_64_sha256}\"/" Formula/rdap.rb
+    sed -i '' "7s/.*/    sha256 \"${aarch64_sha256}\"/" Formula/rdap.rb
+    sed -i '' "10s/.*/    sha256 \"${x86_64_sha256}\"/" Formula/rdap.rb
 
     # Delete the new binaries
     rm -f rdap_macos*
