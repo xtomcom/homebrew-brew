@@ -1,13 +1,13 @@
 class Rdap < Formula
   desc "A command-line RDAP client for querying domain, IP, and ASN information"
   homepage "https://github.com/xtomcom/rdap"
-  version "1.0.8"
+  version "1.0.9"
   if Hardware::CPU.arm?
     url "https://github.com/xtomcom/rdap/releases/download/v#{version}/rdap-#{version}-macos-aarch64"
-    sha256 "b117ee50f1fbbeee55273ba26ae19f02f412221e077dea82f78f91ee273971bd"
+    sha256 "b98aa974d8e40ae9b6848326536bbae2c69f8d896d6753d6f6c64d5964df4fb7"
   else
     url "https://github.com/xtomcom/rdap/releases/download/v#{version}/rdap-#{version}-macos-x86_64"
-    sha256 "a533a7b22a190dead7368888aebf1a609a08578a77498541c8c79902ab941582"
+    sha256 "04826fbcc881170607e6afc07fb22c64a9b4c770b2050fe34ba87eb07f05fccb"
   end
   license "MIT"
 
